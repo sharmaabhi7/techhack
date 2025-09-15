@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechHack 2025 - Rai University Hackathon (Dark)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Audiowide&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-orange: #FF8B42;
+      --light-orange: #b0622a;
+      --orange-accent: #FF7629;
+      --dark-bg: #0F0F0F;
+      --card-bg: #1A1A1A;
+      --border-dark: #2A2A2A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #B0B0B0;
+      --text-muted: #808080;
+      --shadow-dark: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-heavy: 0 16px 64px rgba(0, 0, 0, 0.5);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--dark-bg);
+      min-height: 100vh;
+      color: var(--text-primary);
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #ff9131, #ff9131, #ff9131);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Header Styles */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: transparent;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 20px 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-menu a {
+      color: whitesmoke;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary-orange);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+      background-image: url('img/rais.webp');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      font-family: 'Audiowide', cursive;
+      letter-spacing: 0.15em;
+      text-shadow: 2px 2px 6px rgba(255, 139, 66, 0.7);
+    }
+
+    .hero-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, var(--primary-orange), var(--orange-accent));
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-heavy);
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .section-title p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Grid Layouts */
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    /* Card Styles */
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: var(--shadow-dark);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-dark);
+      margin-bottom: 20px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-medium);
+      border-color: var(--primary-orange);
+    }
+
+    /* Special card variations */
+    .card.highlight {
+      background: linear-gradient(135deg, rgba(255, 139, 66, 0.05), rgba(255, 117, 41, 0.05));
+      border: 2px solid var(--primary-orange);
+      box-shadow: 0 0 25px rgba(255, 139, 66, 0.2);
+    }
+
+  /* Coordinator Cards */
+  .coordinator-card {
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-dark);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: var(--shadow-dark);
+    background: var(--card-bg);
+  }
+
+  .coordinator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-orange);
+  }
+
+  .coordinator-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid var(--primary-orange);
+    transition: all 0.3s ease;
+  }
+
+  .coordinator-card:hover img {
+    border-color: var(--orange-accent);
+    transform: scale(1.05);
+  }
+
+  .coordinator-card h3 {
+    margin-bottom: 10px;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .coordinator-card p {
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  .coordinator-card a {
+    color: var(--primary-orange);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+
+  .coordinator-card a:hover {
+    color: var(--orange-accent);
+  }
+
+    /* Countdown Styles */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .countdown-item {
+      text-align: center;
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-dark);
+      min-width: 100px;
+      border: 1px solid var(--border-dark);
+    }
+
+    .countdown-item span {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--primary-orange);
+    }
+
+    .countdown-item label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    /* FAQ Styles */
+    .faq-item {
+      margin-bottom: 30px;
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-dark);
+      border: 1px solid var(--border-dark);
+    }
+
+    .faq-item h4 {
+      margin-bottom: 15px;
+      color: var(--text-primary);
+      font-size: 1.2rem;
+    }
+
+    .faq-item p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background: #000000;
+      color: var(--text-secondary);
+      padding: 60px 0 20px;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer h3 {
+      margin-bottom: 20px;
+      color: var(--primary-orange);
+    }
+
+    .footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: var(--primary-orange);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-dark);
+      color: var(--text-muted);
+    }
+
+    /* Prize Pool Styles */
+    .prize-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .prize-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: var(--shadow-dark);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-dark);
+    }
+
+    .prize-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-medium);
+      border-color: var(--primary-orange);
+    }
+
+    .prize-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      padding: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .prize-icon.first {
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+    }
+
+    .prize-icon.second {
+      background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+    }
+
+    .prize-icon.third {
+      background: linear-gradient(135deg, #CD7F32, #B8860B);
+    }
+
+    .prize-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-orange);
+      margin-bottom: 10px;
+    }
+
+    .prize-description {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    /* Slideshow Styles */
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-dark);
+      border: 1px solid var(--border-dark);
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 500px;
+      object-fit: contain;
+      background: var(--card-bg);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title h1 {
+        font-size: 2rem;
+      }
+
+      .section-title p {
+        font-size: 1rem;
+      }
+
+      .countdown {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .countdown-item {
+        min-width: 80px;
+        padding: 15px;
+      }
+
+      .countdown-item span {
+        font-size: 2rem;
+      }
+
+      .prize-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .slide img {
+        height: 300px;
+      }
+
+      /* Coordinator Cards Mobile */
+      .coordinator-card {
+        max-width: 100% !important;
+        margin: 0 auto;
+        padding: 25px 20px;
+      }
+
+      .coordinator-card img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .coordinator-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .coordinator-card p {
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+      }
+
+      /* Grid adjustments for mobile */
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      /* Card adjustments */
+      .card {
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      /* Section spacing */
+      .section {
+        padding: 60px 0;
+      }
+
+      .section-title {
+        margin-bottom: 40px;
+      }
+
+      /* Button adjustments */
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      /* FAQ adjustments */
+      .faq-item {
+        padding: 20px;
+      }
+
+      /* Prize cards mobile */
+      .prize-card {
+        padding: 30px 20px;
+      }
+
+      .prize-amount {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      .section {
+        padding: 50px 0;
+      }
+
+      .section-title h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .coordinator-card img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .countdown-item {
+        min-width: 70px;
+        padding: 12px;
+      }
+
+      .countdown-item span {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav-flex">
+        <img src="img/RAI_UNIVERSITY copy.png" alt="Rai University" style="height: 50px; width: auto;">
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about-university">About</a></li>
+          <li><a href="#coordinators">Coordinators</a></li>
+          
+          <li><a href="#faq">FAQ</a></li>
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h3 style="color: #ffffff;">Welcome to</h3>
+        <h1 class="gradient-text" style="background: linear-gradient(45deg, #7b0505, #7b0505, #7b0505); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">TechHack 2025</h1>        <p style="color: #ffffff;">innovation & technology hackathon</p>
+       
+        <a href="https://forms.gle/9tmY7m1QgGbzjsCZ7" class="btn" target="_blank">Register Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-title">
+          <h1 class="gradient-text">TechHack 2025</h1>
+        <div style="max-width: 900px; margin: 0 auto; padding: 30px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-dark);">
+          <div style="background: linear-gradient(135deg, var(--primary-orange), var(--orange-accent)); color: white; padding: 6px 20px; border-radius: 15px; font-weight: 600; font-size: 0.8rem; display: inline-block; margin-bottom: 20px;">STATE-LEVEL HACKATHON</div>
+          <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-secondary); text-align: justify;">A state-level hackathon at Rai University, bringing together <strong style="color: var(--primary-orange);"></strong> from Gujarat State across diverse disciplines to solve real-world challenges through innovation and collaboration. The event features both online and offline rounds, fostering creativity in fields like social impact, emerging technologies, and business solutions.</p>
+        </div>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card">
+          <h3 class="gradient-text">DATE</h3>
+          <p style="color: var(--text-secondary);">1st round 4th October 2025 (Online)</p>
+          <p style="color: var(--text-secondary);">2nd round 9th October 2025 (Offline)</p>
+        </div>
+        <div class="card">
+          <h3 class="gradient-text">LOCATION</h3>
+          <p style="color: var(--text-secondary);">SH 144, Village – Saroda, Taluka – Dholka,<br>Dist. – Ahmedabad – 382260, Gujarat (India).</p>
+        </div>
+        <div class="card">
+          <h3 class="gradient-text">PARTICIPANTS</h3>
+          <p style="color: var(--text-secondary);">1000+ Students<br>Gujarat State</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Rai University Section -->
+  <section id="about-university" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">About Rai University</h1>
+      </div>
+      
+      <div class="card" style="max-width: 900px; margin: 0 auto; padding: 40px;">
+        <div style="text-align: center; margin-bottom: 25px;">
+          <span style="background: var(--primary-orange); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.9rem; font-weight: 500; margin-right: 10px;">UGC-Recognized</span>
+          <span style="background: var(--orange-accent); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">NAAC-Accredited</span>
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+          <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); text-align: justify;">
+            Rai University, Ahmedabad (UGC-recognized & NAAC-accredited), established under <strong style="color: var(--text-primary);">Gujarat Act No. 12 of 2012</strong>, is dedicated to providing quality, skill-oriented, and holistic education across disciplines like Engineering, Management, Pharmacy, Law, Agriculture, and Sciences.
+          </p>
+        </div>
+        
+        <div style="padding: 20px; background: rgba(255, 139, 66, 0.1); border-radius: 8px; border-left: 4px solid var(--primary-orange);">
+          <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); text-align: justify; margin: 0;">
+            Spread over a lush green campus, the university blends curriculum with life skills to shape globally competent and ethical leaders. With strong focus on research, industry collaborations, and international tie-ups, Rai University ensures students gain practical exposure and entrepreneurial mindset.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Rai School of Engineering Section -->
+  <section id="about-rse" class="section">
+    <div class="container">
+      <div class="section-title" style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <h1 class="gradient-text" style="margin: 0;">About Rai School of Engineering</h1>
+        <img src="img/rse.png" alt="Rai School of Engineering Logo" style="width: 120px; height: auto; border-radius: 8px;">
+      </div>
+
+      <div class="card" style="max-width: 900px; margin: 0 auto; padding: 40px;">
+        
+
+        <div style="text-align: center; margin-bottom: 25px;">
+          <span style="background: var(--primary-orange); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">Established 2013</span>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+          <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); text-align: justify;">
+            Rai School of Engineering is a constituent School of Rai University established in 2013 consists of <strong>M.Tech, MCA, B.Tech, BCA, B.Sc IT and Diploma Programmes</strong>. RSE emphasizes on Skill Development, Project Based Learning and ICT enabled pedagogies to provide Outcome Based Education to the budding Student fraternity.
+          </p>
+        </div>
+
+        <div style="padding: 20px; background: rgba(255, 139, 66, 0.1); border-radius: 8px; border-left: 4px solid var(--primary-orange);">
+          <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); text-align: justify; margin: 0;">
+            RSE is powered by distinguished Faculties who focus on Quality Research Papers, Chapters and Books in addition to Patent publication and grant.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Organizing Committee Section -->
+  <section class="section" style="padding: 20px 0;">
+    <div class="container">
+      <div class="section-title" style="letter-spacing: 0.05em; border: 2px solid var(--primary-orange); padding: 15px 30px; border-radius: 12px; max-width: fit-content; margin: 0 auto 10px auto;">
+        <h1 class="gradient-text" style="font-size: 2.8rem; text-transform: none; margin: 0;">Organizing Committee</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patron Section -->
+  <section id="patron" class="section" style="padding-bottom: 40px;">
+    <div class="container">
+      <div class="section-title" style="letter-spacing: 0.1em;">
+        <h1 class="gradient-text">Patron</h1>
+      </div>
+
+      <div style="display: flex; justify-content: center;">
+        <div class="card coordinator-card" style="max-width: 400px;">
+          <img src="img/Dr. Anil Tomar.jpg" alt="Dr. Anil Tomar">
+          <h3> Dr.Anil Tomar</h3>
+          <p>Hon'ble Provost - Rai University</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Co-Patrons Section -->
+  <section id="co-patrons" class="section" style="padding-top: 40px; padding-bottom: 40px;">
+    <div class="container">
+      <div class="section-title" style="letter-spacing: 0.1em;">
+        <h1 class="gradient-text">Co-Patrons</h1>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 30px;">
+        <div class="card coordinator-card" style="max-width: 400px;">
+          <img src="img/Deepak_vyas-423x450.png" alt="Prof. (Dr.) Deepak Krishna Vyas">
+          <h3> Dr.Deepak Krishna Vyas</h3>
+          <p>Registrar - Rai University</p>
+        </div>
+
+        <div class="card coordinator-card" style="max-width: 400px;">
+          <img src="img/jay_dave-1.png" alt="Prof. (Dr.) Dave Jaykumar Ashwinkumar">
+          <h3>Prof. (Dr.) Dave Jaykumar</h3>
+          <p>Dean - RSE</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coordinators Section -->
+  <section id="coordinators" class="section" style="padding-top: 40px;">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Coordinators</h1>
+        <p>Meet our dedicated coordinators from RAI School of Engineering</p>
+      </div>
+      
+      <div class="grid grid-2">
+        <div class="card coordinator-card">
+          <img src="img/poonam_mam-300x300.png" alt="Ms. Poonam Chakravarty">
+          <h3>Ms. Poonam Chakravarty</h3>
+          <p>HOD, Dept of CSE/IT</p>
+          
+          <div>📧 <a href="mailto:saket.swarndeep@raiuniversity.edu" style="color: var(--primary-orange); text-decoration: none;">poonam.chakravarty@raiuniversity.edu</a></div>
+        </div>
+        <div class="card coordinator-card">
+          <img src="img/JIgar_pandya_rse-300x300.png" alt="Mr. Jigar Pandya">
+          <h3>Mr. Jigar D. Pandya</h3>
+          <p>HOD, Dept. of CSA</p>
+         
+                    <div>📧 <a href="mailto:saket.swarndeep@raiuniversity.edu" style="color: var(--primary-orange); text-decoration: none;">jigar.pandya@raiuniversity.edu</a></div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Details Section -->
+  <section id="contact-details" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Co-Coordinator</h1>
+        <p>Get in touch with our assistant professors for any queries or support</p>
+      </div>
+
+      <div style="display: flex; justify-content: center;">
+        <div class="card coordinator-card" style="max-width: 400px;">
+          <img src="img/Saket-1.png" alt="Mr. Saket Swarndeep">
+          <h3>Mr. Saket Swarndeep</h3>
+          <p>Assistant Professor, CSE/IT (RSE)</p>
+          <a href="tel:+918780834731">+91 8780834731</a>
+          <div>📧 <a href="mailto:saket.swarndeep@raiuniversity.edu" style="color: var(--primary-orange); text-decoration: none;">saket.swarndeep@raiuniversity.edu</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Coordinators Section -->
+  <section id="student-coordinators" class="section">
+    <div class="container">
+      <div class="section-title" style="text-transform: ; letter-spacing: 0.1em;">
+        <h1 class="gradient-text">Student Coordinor</h1>
+      </div>
+
+      <div class="grid grid-2" style="max-width: 900px; margin: 0 auto;">
+        <div class="card coordinator-card">
+          <img src="./img/cto.jpg" alt="Abhishek Sharma">
+          <h3>Abhishek Sharma</h3>
+          <p>Student Coordinator</p>
+          <a href="tel:+917041101901">+91 70411 01901</a>
+          <div>📧 <a href="mailto:abhis70411@gmail.com" style="color: var(--primary-orange); text-decoration: none;">abhis70411@gmail.com</a></div>
+        </div>
+        <div class="card coordinator-card">
+          <img src="/img/jagi.jpeg" alt="Jagdeep Mohanty">
+          <h3>Jagdeep Mohanty</h3>
+          <p>Student Coordinator</p>
+          <a href="tel:+918260811927">+91 82608 11927</a>
+                    <div>📧 <a href="mailtojagdeepmohanty0718@gmail.com" style="color: var(--primary-orange); text-decoration: none;">jagdeepmohanty0718@gmail.com</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Poster & Problem Statement Section -->
+  <section id="poster-problem-statements" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Resources & Downloads</h1>
+        <p>Access the official poster and problem statements for TechHack 2025</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: start;">
+        <!-- Poster Section -->
+        <div class="card" style="text-align: center; padding: 40px;">
+          <h3 class="gradient-text" style="margin-bottom: 20px; font-size: 1.8rem;">Official Poster</h3>
+          <img src="img/poster.jpeg" alt="TecHHack 2025 Poster" style="width: 100%; max-width: 400px; height: auto; border-radius: 15px; box-shadow: var(--shadow-heavy); margin-bottom: 25px;">
+          <p style="color: var(--text-secondary); margin-bottom: 25px; font-size: 1.1rem;">Download the official event poster featuring QR code for easy registration</p>
+          <a href="img/poster.jpeg" download class="btn" style="display: inline-block; padding: 15px 30px; font-size: 1.1rem;">Download Poster</a>
+        </div>
+
+        <!-- Problem Statement Section -->
+        <div class="card" style="text-align: center; padding: 40px;">
+          <h3 class="gradient-text" style="margin-bottom: 20px; font-size: 1.8rem;">Problem Statements</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 25px; font-size: 1.1rem;">Comprehensive collection of challenge statements and participation guidelines</p>
+          <div style="background: rgba(255, 139, 66, 0.1); padding: 30px; border-radius: 15px; margin-bottom: 25px;">
+            <h4 style="color: var(--primary-orange); margin-bottom: 10px;">Google Drive Repository</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Secure access to all hackathon resources, detailed guidelines, and problem documentation</p>
+          </div>
+          <a href="problem-statment.html" target="_blank" class="btn" style="padding: 15px 30px; font-size: 1.1rem;">Access Repository</a>
+        </div>
+
+        <!-- Rules and Regulation Section -->
+        
+
+
+  </section>
+
+  <!-- Rules Section -->
+  <section class="section" style="padding: 60px 0;">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Rules & Regulations</h1>
+        <p>Complete set of event rules, regulations, and participation guidelines</p>
+      </div>
+
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <div class="card" style="padding: 40px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px;">
+            <div style="text-align: center;">
+              <div style="background: var(--primary-orange); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem; font-weight: bold;">👥</div>
+              <h4 style="color: var(--primary-orange); margin-bottom: 10px;">Team Composition</h4>
+              <p style="color: var(--text-secondary); font-size: 0.95rem;">2-5 members per team with team leader coordination</p>
+            </div>
+            <div style="text-align: center;">
+              <div style="background: var(--orange-accent); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem; font-weight: bold;">🎯</div>
+              <h4 style="color: var(--orange-accent); margin-bottom: 10px;">Single Problem</h4>
+              <p style="color: var(--text-secondary); font-size: 0.95rem;">One problem statement per team, no multiple submissions</p>
+            </div>
+            <div style="text-align: center;">
+              <div style="background: var(--primary-orange); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem; font-weight: bold;">🏛️</div>
+              <h4 style="color: var(--primary-orange); margin-bottom: 10px;">Eligibility</h4>
+              <p style="color: var(--text-secondary); font-size: 0.95rem;">Gujarat students from recognized institutions</p>
+            </div>
+            <div style="text-align: center;">
+              <div style="background: var(--orange-accent); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem; font-weight: bold;">⚖️</div>
+              <h4 style="color: var(--orange-accent); margin-bottom: 10px;">Code of Conduct</h4>
+              <p style="color: var(--text-secondary); font-size: 0.95rem;">Ethical practices and plagiarism-free submissions</p>
+            </div>
+          </div>
+
+          <div style="background: rgba(255, 139, 66, 0.08); padding: 25px; border-radius: 12px; border-left: 4px solid var(--primary-orange); margin-bottom: 30px;">
+            <h4 style="color: var(--primary-orange); margin-bottom: 15px;">Key Guidelines</h4>
+            <ul style="color: var(--text-secondary); line-height: 1.6; margin: 0; padding-left: 20px;">
+              <li>All team members must belong to the same institution</li>
+              <li>Accurate registration details are mandatory</li>
+              <li>Strict adherence to all guidelines throughout the event</li>
+              <li>Decision authority rests with the jury and Rai University committee</li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <a href="rules.html" target="_blank" class="btn" style="padding: 15px 35px; font-size: 1.1rem;">View Complete Rules & Regulations</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prize Pool Section -->
+  <section id="prize-pool" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Prize Pool</h1>
+        <p>Exciting rewards await the winners</p>
+      </div>
+      
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <div class="prize-grid">
+          <div class="prize-card">
+            <div class="prize-icon first">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                <path d="M4 22h16"/>
+                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+              </svg>
+            </div>
+            <h3 class="gradient-text" style="font-size: 1.5rem; margin-bottom: 10px;">1st Place</h3>
+            <div class="prize-amount">₹10,000+</div>
+            <p class="prize-description">Cash Prize</p>
+          </div>
+          
+          <div class="prize-card">
+            <div class="prize-icon second">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              </svg>
+            </div>
+            <h3 class="gradient-text" style="font-size: 1.5rem; margin-bottom: 10px;">2nd Place</h3>
+            <div class="prize-amount">₹5,000+</div>
+            <p class="prize-description">Cash Prize</p>
+          </div>
+          
+          <div class="prize-card">
+            <div class="prize-icon third">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            </div>
+            <h3 class="gradient-text" style="font-size: 1.5rem; margin-bottom: 10px;">3rd Place</h3>
+            <div class="prize-amount">₹3,000+</div>
+            <p class="prize-description">Cash Prize</p>
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 60px;">
+          <div class="card" style="max-width: 600px; margin: 0 auto; padding: 40px;">
+            <div style="background: var(--primary-orange); color: white; padding: 8px 20px; border-radius: 4px; display: inline-block; margin-bottom: 25px; font-weight: 600; font-size: 0.9rem;">TOTAL PRIZE POOL</div>
+            <h2 style="font-size: 2.2rem; color: var(--primary-orange); margin-bottom: 10px; font-weight: 700;">₹20,000<sup>*</sup></h2>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 35px;">+ Cash Prizes and Goodies</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 550px; margin: 0 auto;">
+              <div style="background: rgba(255, 139, 66, 0.08); padding: 20px; border-radius: 12px; text-align: left; border-left: 4px solid var(--primary-orange);">
+                <h5 style="color: var(--primary-orange); margin-bottom: 8px; font-weight: 600;">Cash Prizes</h5>
+                <p style="color: var(--medium-text); font-size: 0.9rem; margin: 0;">Top performing teams</p>
+              </div>
+              <div style="background: rgba(255, 139, 66, 0.08); padding: 20px; border-radius: 12px; text-align: left; border-left: 4px solid var(--orange-accent);">
+                <h5 style="color: var(--orange-accent); margin-bottom: 8px; font-weight: 600;">Goodies & Swag</h5>
+                <p style="color: var(--medium-text); font-size: 0.9rem; margin: 0;">All participants</p>
+              </div>
+              <div style="background: rgba(255, 139, 66, 0.08); padding: 20px; border-radius: 12px; text-align: left; border-left: 4px solid var(--primary-orange);">
+                <h5 style="color: var(--primary-orange); margin-bottom: 8px; font-weight: 600;">Certificates</h5>
+                <p style="color: var(--medium-text); font-size: 0.9rem; margin: 0;">All participants</p>
+              </div>
+              <div style="background: rgba(255, 139, 66, 0.08); padding: 20px; border-radius: 12px; text-align: left; border-left: 4px solid var(--orange-accent);">
+                <h5 style="color: var(--orange-accent); margin-bottom: 8px; font-weight: 600;">Recognition</h5>
+                <p style="color: var(--medium-text); font-size: 0.9rem; margin: 0;">Innovative solutions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Countdown Section -->
+  <section class="section" style="background: rgba(26, 26, 26, 0.5);">
+    <div class="container">
+      <div class="section-title">
+          <h1 class="gradient-text">Time left until TechHack 2025</h1>
+          <p>4th October 2025 - Innovation & Technology Hackathon</p>
+      </div>
+
+      <div id="countdown" class="countdown">
+        <div class="countdown-item">
+          <span id="days">0</span>
+          <label>Days</label>
+        </div>
+        <div class="countdown-item">
+          <span id="hours">0</span>
+          <label>Hours</label>
+        </div>
+        <div class="countdown-item">
+          <span id="minutes">0</span>
+          <label>Minutes</label>
+        </div>
+        <div class="countdown-item">
+          <span id="seconds">0</span>
+          <label>Seconds</label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsor Section -->
+  <section id="sponsors" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Sponsored By</h1>
+        <p>We are grateful to our sponsors for making TecHHack 2025 possible</p>
+      </div>
+
+      <div style="text-align: center;">
+        <div class="card" style="max-width: 600px; margin: 0 auto; padding: 40px;">
+          <img src="img/sponser.jpeg" alt="Sponsor" style="max-width: 100%; height: auto; border-radius: 12px; background-color: transparent;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Image Gallery Section -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Gallery</h1>
+        <p>Explore moments from our previous events and get a glimpse of what awaits you</p>
+      </div>
+
+      <div class="slideshow-container">
+        <div class="slide active">
+          <img src="img/image1.jpeg" alt="Gallery Image 1">
+        </div>
+        <div class="slide">
+          <img src="img/image2.jpeg" alt="Gallery Image 2">
+        </div>
+        <div class="slide">
+          <img src="img/image3.jpeg" alt="Gallery Image 3">
+        </div>
+        <div class="slide">
+          <img src="img/image4.jpeg" alt="Gallery Image 4">
+        </div>
+        <div class="slide">
+          <img src="img/image5.jpeg" alt="Gallery Image 5">
+        </div>
+        <div class="slide">
+          <img src="img/image6.jpeg" alt="Gallery Image 6">
+        </div>
+        <div class="slide">
+          <img src="img/image7.jpeg" alt="Gallery Image 7">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Frequently Asked Questions</h1>
+      </div>
+      
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="faq-item">
+          <h4>What are the prizes?</h4>
+          <p>Winners get up to <strong style="color: var(--primary-orange);">₹20,000<sup>*</sup> + Cash Prizes and Goodies</strong><br><br>
+          <strong>Prize Distribution:</strong><br>
+          • Cash prizes for top performing teams<br>
+          • Exciting goodies and swag for participants<br>
+          • Certificates for all participants<br>
+          • Special recognition for innovative solutions</p>
+        </div>
+        <div class="faq-item">
+          <h4>Who can participate?</h4>
+          <p>The hackathon is open to all students enrolled in colleges/universities across Gujarat, India. Both individual participants and teams of up to 4 members are welcome.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What should I bring?</h4>
+          <p>Participants should bring their laptops, chargers, and any other hardware/software tools they need. Food and refreshments will be provided during the event.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Is there a registration fee?</h4>
+          <p>Yes, the registration fees are as follows:<br>
+          - ₹500 per team for students from other institutions<br>
+          - ₹300 per team for Rai University students<br>
+          Registration fee includes lunch, refreshments, and participation kit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section id="location" class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Location</h1>
+        <p>Find us on the map and get in touch</p>
+      </div>
+
+      <div style="text-align: center;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.304306785854!2d72.47077717553773!3d22.81698417931843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e92d7452e8655%3A0x8b3fd7e0e7f3d3bb!2sRai%20University!5e1!3m2!1sen!2sin!4v1756965806214!5m2!1sen!2sin" width="100%" height="450" style="border: 0; border-radius: 12px; max-width: 800px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Poster & Problem Statement Section -->
+  
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <h3>TechHack 2025</h3>
+          <p>The premier hackathon bringing together the brightest minds to build the future of technology.</p>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <p><a href="#about">About</a></p>
+          <p><a href="#coordinators">Coordinators</a></p>
+          <p><a href="#faq">FAQ</a></p>
+        </div>
+        <div>
+          <h3>Location</h3>
+          <p>Rai University<br>
+          SH144, Saroda, Gujarat 382260<br><br>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 TecHHack - Rai University. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function startCountdown() {
+      var target = new Date(2025, 9, 4, 9, 0, 0).getTime();
+      var now = new Date().getTime();
+      var diff = target - now;
+
+      if (diff > 0) {
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+      } else {
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+      }
+    }
+
+    startCountdown();
+    setInterval(startCountdown, 1000);
+
+    // Slideshow functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 5000);
+  </script>
+</body>
+</html>

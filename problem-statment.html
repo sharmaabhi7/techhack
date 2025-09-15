@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Statements - TecHHack 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-orange: #ff8a42bb;
+      --light-orange: #FFB17A;
+      --orange-accent: #FF7629;
+      --dark-bg: #0f0f0ff9;
+      --card-bg: #1A1A1A;
+      --border-dark: #2A2A2A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #B0B0B0;
+      --text-muted: #808080;
+      --shadow-dark: 0 4px 16px rgba(138, 138, 138, 0.3);
+      --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-heavy: 0 16px 64px rgba(0, 0, 0, 0.5);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--dark-bg);
+      min-height: 100vh;
+      color: var(--text-primary);
+      margin-top: 80px; /* To avoid overlap with fixed header */
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #FF8B42, #FF7629, #FF6600);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Header Styles */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: transparent;
+      backdrop-filter: blur(20px);
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-menu a {
+      color: whitesmoke;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary-orange);
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Problem Statement Styles */
+    .problem-section {
+      margin-bottom: 60px;
+    }
+
+    .problem-section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: var(--primary-orange);
+      text-align: center;
+    }
+
+    .problem-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-dark);
+      border: 1px solid var(--border-dark);
+      margin-bottom: 30px;
+    }
+
+    .problem-table th {
+      background: var(--primary-orange);
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .problem-table td {
+      padding: 15px;
+      border-bottom: 1px solid var(--border-dark);
+      color: var(--text-secondary);
+    }
+
+    .problem-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .problem-table tr:hover {
+      background: rgba(255, 139, 66, 0.05);
+    }
+
+    /* Search Input Styles */
+    .search-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      margin: 20px auto 0;
+      display: block;
+      font-family: inherit;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 2px rgba(255, 139, 66, 0.2);
+    }
+
+    /* Pagination Styles */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      padding: 8px 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-dark);
+      color: var(--text-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .pagination button:hover {
+      background: var(--primary-orange);
+      color: white;
+      border-color: var(--primary-orange);
+    }
+
+    .pagination button.active {
+      background: var(--primary-orange);
+      color: white;
+      border-color: var(--primary-orange);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .section-title h1 {
+        font-size: 2rem;
+      }
+
+      .search-input {
+        max-width: 100%;
+        margin: 15px auto 0;
+      }
+
+      .problem-table {
+        font-size: 0.9rem;
+      }
+
+      .problem-table th,
+      .problem-table td {
+        padding: 10px;
+      }
+
+      .pagination {
+        gap: 5px;
+      }
+
+      .pagination button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav-flex">
+        <a href="dark.html"><img src="img/RAI_UNIVERSITY copy.png" alt="Rai University" style="height: 50px; width: auto;"></a>
+        <ul class="nav-menu">
+          <li><a href="dark.html#home">Home</a></li>
+          <li><a href="dark.html#about-university">About</a></li>
+          <li><a href="dark.html#coordinators">Coordinators</a></li>
+          <li><a href="dark.html#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Problem Statements Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Problem Statements</h1>
+        <p>Explore the challenge statements for TecHHack 2025, organized by categories</p>
+      </div>
+
+      <div id="problemList"></div>
+    </div>
+  </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script>
+      const problemListDiv = document.getElementById('problemList');
+
+      // Load CSV file and parse
+      Papa.parse('Problem statement RUTH - Sheet1.csv', {
+        download: true,
+        header: true,
+        complete: function(results) {
+          const data = results.data;
+
+      // Group by Tags
+      const grouped = {};
+      data.forEach(row => {
+        const tag = row.Tags || 'Other';
+        if (!grouped[tag]) grouped[tag] = [];
+        grouped[tag].push(row);
+      });
+
+      // Pagination and Search Setup
+      const itemsPerPage = 30;
+      let currentPage = 1;
+      let filteredGrouped = JSON.parse(JSON.stringify(grouped)); // Deep copy for filtering
+
+      // Create search input
+      const searchInput = document.createElement('input');
+      searchInput.type = 'text';
+      searchInput.placeholder = 'Search problem statements...';
+      searchInput.className = 'search-input';
+      problemListDiv.parentNode.insertBefore(searchInput, problemListDiv);
+
+      // Create pagination container
+      const paginationDiv = document.createElement('div');
+      paginationDiv.className = 'pagination';
+      problemListDiv.parentNode.appendChild(paginationDiv);
+
+      function renderPage(page) {
+        problemListDiv.innerHTML = '';
+        paginationDiv.innerHTML = '';
+
+        // Calculate total pages
+        let totalItems = 0;
+        Object.values(filteredGrouped).forEach(arr => totalItems += arr.length);
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        // Flatten filteredGrouped into a single array with tag info
+        const flatList = [];
+        Object.entries(filteredGrouped).forEach(([tag, items]) => {
+          items.forEach(item => {
+            flatList.push({ tag, item });
+          });
+        });
+
+        // Get items for current page
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, flatList.length);
+        const pageItems = flatList.slice(startIndex, endIndex);
+
+        // Group page items by tag
+        const pageGrouped = {};
+        pageItems.forEach(({ tag, item }) => {
+          if (!pageGrouped[tag]) pageGrouped[tag] = [];
+          pageGrouped[tag].push(item);
+        });
+
+        // Render grouped items
+        Object.keys(pageGrouped).forEach(tag => {
+          const sectionDiv = document.createElement('div');
+          sectionDiv.className = 'problem-section';
+          sectionDiv.innerHTML = `<h2>${tag}</h2>`;
+          pageGrouped[tag].forEach(row => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'problem-item';
+            itemDiv.innerHTML = `
+            <table class="problem-table">
+              <thead>
+                <tr>
+                  <th>Problem Statement ID</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Tags</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>${row['Problem statement ID']}</td>
+                  <td>${row.Title}</td>
+                  <td>${row.Description}</td>
+                  <td>${row.Tags}</td>
+                </tr>
+              </tbody>
+            </table>
+            `;
+            sectionDiv.appendChild(itemDiv);
+          });
+          problemListDiv.appendChild(sectionDiv);
+        });
+
+        // Render pagination buttons
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement('button');
+          btn.textContent = i;
+          if (i === page) btn.classList.add('active');
+          btn.addEventListener('click', () => {
+            currentPage = i;
+            renderPage(currentPage);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+          paginationDiv.appendChild(btn);
+        }
+      }
+
+      // Search input event
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) {
+          filteredGrouped = JSON.parse(JSON.stringify(grouped));
+        } else {
+          filteredGrouped = {};
+          Object.entries(grouped).forEach(([tag, items]) => {
+            const filteredItems = items.filter(item =>
+              item['Problem statement ID'].toLowerCase().includes(query) ||
+              item.Title.toLowerCase().includes(query) ||
+              item.Description.toLowerCase().includes(query) ||
+              item.Tags.toLowerCase().includes(query)
+            );
+            if (filteredItems.length > 0) {
+              filteredGrouped[tag] = filteredItems;
+            }
+          });
+        }
+        currentPage = 1;
+        renderPage(currentPage);
+      });
+
+      // Initial render
+      renderPage(currentPage);
+        }
+      });
+    </script>
+
+  </body>
+  </html>

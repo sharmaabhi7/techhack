@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rules and Regulation - TecHHack 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-orange: #ff8a42bb;
+      --light-orange: #FFB17A;
+      --orange-accent: #FF7629;
+      --dark-bg: #0f0f0ff9;
+      --card-bg: #1A1A1A;
+      --border-dark: #2A2A2A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #B0B0B0;
+      --text-muted: #808080;
+      --shadow-dark: 0 4px 16px rgba(138, 138, 138, 0.3);
+      --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-heavy: 0 16px 64px rgba(0, 0, 0, 0.5);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--dark-bg);
+      min-height: 100vh;
+      color: var(--text-primary);
+      margin-top: 80px; /* To avoid overlap with fixed header */
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #FF8B42, #FF7629, #FF6600);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Header Styles */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: transparent;
+      backdrop-filter: blur(20px);
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-menu a {
+      color: whitesmoke;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary-orange);
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Problem Statement Styles */
+    .problem-section {
+      margin-bottom: 60px;
+    }
+
+    .problem-section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: var(--primary-orange);
+      text-align: center;
+    }
+
+    .problem-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-dark);
+      border: 1px solid var(--border-dark);
+      margin-bottom: 30px;
+    }
+
+    .problem-table th {
+      background: var(--primary-orange);
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .problem-table td {
+      padding: 15px;
+      border-bottom: 1px solid var(--border-dark);
+      color: var(--text-secondary);
+    }
+
+    .problem-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .problem-table tr:hover {
+      background: rgba(255, 139, 66, 0.05);
+    }
+
+    /* Search Input Styles */
+    .search-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      margin: 20px auto 0;
+      display: block;
+      font-family: inherit;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 2px rgba(255, 139, 66, 0.2);
+    }
+
+    /* Pagination Styles */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      padding: 8px 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-dark);
+      color: var(--text-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .pagination button:hover {
+      background: var(--primary-orange);
+      color: white;
+      border-color: var(--primary-orange);
+    }
+
+    .pagination button.active {
+      background: var(--primary-orange);
+      color: white;
+      border-color: var(--primary-orange);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      .section-title h1 {
+        font-size: 2rem;
+      }
+
+      .search-input {
+        max-width: 100%;
+        margin: 15px auto 0;
+      }
+
+      .problem-table {
+        font-size: 0.9rem;
+      }
+
+      .problem-table th,
+      .problem-table td {
+        padding: 10px;
+      }
+
+      .pagination {
+        gap: 5px;
+      }
+
+      .pagination button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav-flex">
+        <a href="dark.html"><img src="img/RAI_UNIVERSITY copy.png" alt="Rai University" style="height: 50px; width: auto;"></a>
+        <ul class="nav-menu">
+          <li><a href="dark.html#home">Home</a></li>
+          <li><a href="dark.html#about-university">About University</a></li>
+          <li><a href="dark.html#coordinators">Coordinators</a></li>
+          <li><a href="dark.html#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Rules Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1 class="gradient-text">Rules and Regulation</h1>
+        <p>Complete set of event rules, regulations, and participation guidelines</p>
+      </div>
+
+      <div style="max-width: 900px; margin: 0 auto; background: var(--card-bg); padding: 40px; border-radius: 12px; border: 1px solid var(--border-dark); box-shadow: var(--shadow-dark);">
+        <h2 class="gradient-text" style="text-align: center; margin-bottom: 30px;">TECHHACK 2025 Hackathon Registration Guidelines and Rules</h2>
+
+        <section style="line-height: 1.7; font-size: 1.1rem; color: var(--text-secondary);">
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">1. Team Composition:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>Each team should consist of a maximum of 5 members including a team leader and minimum 2 Members.</li>
+            <li>The team leader will be responsible for the coordination and communication throughout the event.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">2. Single Problem Statement:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>Each team must work on only one problem statement of their choice. Multiple problem statements may not be pursued by the same team.</li>
+            <li>One student may only be part of one team and cannot participate in multiple teams.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">3. Team Member Eligibility:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>All team members must belong to the same School/College/University.</li>
+            <li>No inter-institutional teams are allowed. However, members from different branches of the same School/College/University are encouraged to form a team.</li>
+            <li>Open to UG, PG, and Research Students.</li>
+            <li>Students from Computer Science, Engineering, IT, and related disciplines are encouraged.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">4. Post-Regional Round Team Changes:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>After the first round, no changes to the team members are allowed.</li>
+            <li>Team composition must remain unchanged for the duration of the hackathon.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">5. Accurate Registration:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>All details entered during registration on the google form must be accurate and correct. Any incorrect or misleading information may result in the disqualification of the team.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">6. Guideline Compliance:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>Teams must strictly follow all guidelines and instructions throughout the hackathon.</li>
+            <li>Failure to comply with the rules may result in penalties or disqualification.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">7. Team Member Identification:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>The names of team members must be provided as per the official records (School/College/University ID).</li>
+            <li>Any discrepancies in member identification may lead to team elimination.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">8. Code of Conduct:</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>Strict adherence to ethical coding practices.</li>
+            <li>Plagiarism or any form of misconduct will result in disqualification.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">9. Decision-Making:</h3>
+          <p>Decision taking authority is the jury and the jurisdiction to Rai University committee only.</p>
+        </section>
+
+        <h2 class="gradient-text" style="text-align: center; margin-top: 50px; margin-bottom: 30px;">Tie-Breaking Guidelines for Hackathon</h2>
+
+        <section style="line-height: 1.7; font-size: 1.1rem; color: var(--text-secondary);">
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">Extra Evaluation Criteria</h3>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>If two or more teams have equal scores, judges can consider additional parameters such as:</li>
+            <ul style="list-style-type: circle; margin-left: 40px; margin-bottom: 25px;">
+              <li>Innovation & Originality – Uniqueness of the idea.</li>
+              <li>Feasibility & Scalability – Practical implementation and future potential.</li>
+              <li>Impact & Relevance – Usefulness for society/industry.</li>
+              <li>Presentation & Communication – Clarity in explaining the solution.</li>
+            </ul>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">Jury Deliberation Round</h3>
+          <p>Judges may conduct an additional Q&A round with tied teams to assess their depth of understanding and teamwork.</p>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">Prototype Demonstration</h3>
+          <p>A short live demo or stress test can be organized to evaluate functionality under real conditions.</p>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">Bonus Points</h3>
+          <p>Extra points may be awarded for aspects like:</p>
+          <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 25px;">
+            <li>Proper documentation & code quality.</li>
+            <li>Open-source compliance.</li>
+            <li>Ethical use of technology.</li>
+          </ul>
+
+          <h3 style="margin-bottom: 15px; color: var(--primary-orange);">Shared Prize (Last Resort)</h3>
+          <p>If no fair distinction can be made, teams may share the prize with equal recognition (though this should be avoided if possible).</p>
+        </section>
+  </div>
+</body>
+</html>
